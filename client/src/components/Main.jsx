@@ -1,11 +1,13 @@
-import { InputBase, Paper } from "@material-ui/core";
-import { Button } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setAllCustomer, setModal } from "../store/actions";
+
+import { InputBase, Paper } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
 import CustomerTable from "./CustomerTable";
-import { setAllCustomer } from "../store/actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +42,19 @@ const useStyles = makeStyles((theme) => ({
     width: "300px",
     padding: "4px 0 4px 0",
   },
+  addButton: {
+    width: "128px",
+    backgroundColor: "#2285DF",
+    textTransform: "capitalize",
+    marginRight: "12px",
+    color: "white",
+  },
+  uploadButton: {
+    width: "128px",
+    backgroundColor: "#4CAF50",
+    textTransform: "capitalize",
+    color: "white",
+  },
 }));
 
 const Main = () => {
@@ -55,6 +70,12 @@ const Main = () => {
     });
   }, []);
 
+  const handleClickAdd = () => {
+    dispatch(setModal(true));
+  };
+
+  const handleClickUpload = () => {};
+
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
@@ -65,26 +86,17 @@ const Main = () => {
           <div>
             <Button
               variant="contained"
-              color="primary"
-              style={{
-                width: "128px",
-                backgroundColor: "#2285DF",
-                textTransform: "capitalize",
-                marginRight: "12px",
-              }}
+              className={classes.addButton}
               disableElevation
+              onClick={() => handleClickAdd()}
             >
               Add
             </Button>
             <Button
               variant="contained"
-              color="primary"
-              style={{
-                width: "128px",
-                backgroundColor: "#4CAF50",
-                textTransform: "capitalize",
-              }}
+              className={classes.uploadButton}
               disableElevation
+              onClick={() => handleClickUpload()}
             >
               Upload
             </Button>
